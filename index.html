@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rasmalai 💕 Valentine</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital@1&display=swap" rel="stylesheet">
+<style>
+  /* Reset & body */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
+  body { background: #ffe4ec; color: #333; overflow-x: hidden; position: relative; }
+
+  /* Floating hearts animation */
+  .heart { position: absolute; font-size: 1.5rem; color: #ffccd9; animation: float 8s linear infinite; opacity: 0.8; }
+  @keyframes float {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.8; }
+    100% { transform: translateY(-120vh) translateX(20px) rotate(360deg); opacity: 0; }
+  }
+
+  /* Containers */
+  .screen { display: none; min-height: 100vh; width: 100%; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .active { display: flex; }
+
+  /* Password Screen */
+  input[type="password"] { padding: 0.7rem 1rem; border-radius: 10px; border: none; outline: none; font-size: 1rem; margin-top: 1rem; }
+  button { background: #ff99b7; color: #fff; border: none; padding: 0.7rem 1.5rem; border-radius: 12px; font-family: 'Biscuit Glitch', sans-serif; font-size: 1.1rem; cursor: pointer; margin-top: 1rem; transition: 0.3s; }
+  button:hover { background: #ff80a5; }
+
+  /* Cards */
+  .card { background: #ffddee; border-radius: 15px; padding: 1.5rem; margin: 1rem 0; max-width: 90%; box-shadow: 0 5px 15px rgba(0,0,0,0.1); font-style: italic; }
+  .fade-in { animation: fadeIn 1.2s forwards; opacity: 0; }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  /* Proposal buttons */
+  .no-btn { position: relative; }
+
+  /* Days counter */
+  .counter { font-size: 1.1rem; margin: 1rem 0; color: #d63384; }
+
+  /* Responsive */
+  @media (max-width: 500px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    .card { padding: 1rem; }
+    button { font-size: 1rem; padding: 0.6rem 1.2rem; }
+  }
+
+  /* Heading font */
+  @import url('https://fonts.cdnfonts.com/css/biscuit-glitch');
+  h1, h2, h3, button { font-family: 'Biscuit Glitch', sans-serif; }
+
+  /* Confetti / Sparkles */
+  .confetti { position: fixed; top: 0; left: 0; width: 10px; height: 10px; background: #ff99b7; opacity: 0.9; z-index: 9999; pointer-events: none; border-radius: 50%; animation: fall 3s linear infinite; }
+  .sparkle { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: #ffe4ee; border-radius: 50%; opacity: 0.8; z-index: 9999; pointer-events: none; animation: sparkleFall 2.5s linear infinite; }
+  @keyframes fall {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(120vh) translateX(50px) rotate(360deg); opacity: 0; }
+  }
+  @keyframes sparkleFall {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) translateX(30px) rotate(180deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating hearts -->
+<div id="hearts"></div>
+
+<!-- Password Screen -->
+<div id="screen-password" class="screen active">
+  <h1 class="fade-in">Enter the Secret Code 💖</h1>
+  <p class="fade-in" style="animation-delay:0.3s;">Hint: When we started dating 💭💖</p>
+  <input type="password" id="password-input" placeholder="Enter password">
+  <button id="password-btn">Unlock 💌</button>
+  <p id="password-msg" class="fade-in" style="animation-delay:0.5s;color:#d63384;"></p>
+</div>
+
+<!-- Main Content Screen -->
+<div id="screen-main" class="screen">
+  <h1 class="fade-in">Hey Rasmalai 💕</h1>
+
+  <!-- Inside Joke Cards -->
+  <div class="card fade-in" style="animation-delay:0.3s;">
+    Warning ⚠️: This website contains excessive love, dramatic feelings, and 99% Rasmalai energy 😌
+  </div>
+  <div class="card fade-in" style="animation-delay:0.6s;">
+    Side effects may include smiling nonstop and missing me instantly 🫠💕
+  </div>
+  <div class="card fade-in" style="animation-delay:0.9s;">
+    If something feels extra… yes, that’s how I feel about you 😏
+  </div>
+  <div class="card fade-in" style="animation-delay:1.2s;">
+    Built with love, patience, and unhealthy attachment 💖
+  </div>
+
+  <!-- Naughty-cute warning -->
+  <div class="card fade-in" style="animation-delay:1.5s; background:#ffc0cb;">
+    Warning 🔥<br>
+    This website is rated R for Rasmalai<br>
+    because thinking about you<br>
+    makes my heart race<br>
+    and my self-control disappear 😌💖
+  </div>
+
+  <!-- Fun Question -->
+  <div class="card fade-in" style="animation-delay:1.8s;">
+    <h2>Important question 🤨💭</h2>
+    <p>What is my favorite snack?</p>
+    <button class="snack-btn">You 💖</button>
+    <button class="snack-btn">You 😌</button>
+    <button class="snack-btn">You 🫶</button>
+    <button class="snack-btn">You 🧿</button>
+    <p id="snack-msg" style="margin-top:0.5rem;color:#d63384;"></p>
+  </div>
+
+  <!-- Days Together Counter -->
+  <div class="counter fade-in" style="animation-delay:2.1s;">
+    We’ve been together for <span id="days-count">0</span> days of love, drama, and missing each other 💕
+  </div>
+
+  <!-- Extra Mini Messages -->
+  <div class="card fade-in" style="animation-delay:2.4s;">You + Me = My favorite comfort zone 🫶</div>
+  <div class="card fade-in" style="animation-delay:2.7s;">Still can’t believe I get to call you mine 😏</div>
+  <div class="card fade-in" style="animation-delay:3s;">I’d choose you in every universe 💖</div>
+
+  <!-- Final Proposal -->
+  <div class="card fade-in" style="animation-delay:3.3s;">
+    <h2>Rasmalai 💕<br>Will you be my Valentine? 🌹🫶✨</h2>
+    <button id="yes-btn">Yes 💖</button>
+    <button id="no-btn" class="no-btn">No 🙄</button>
+    <p style="font-size:0.9rem;color:#d63384;">That option is just for decoration 😌</p>
+  </div>
+
+  <!-- Celebration Message -->
+  <div id="celebration-msg" class="fade-in" style="display:none; font-size:1.5rem; color:#ff4d94; margin-top:1rem;">
+    I knew it 🥹<br>I love you baby 🫂🧿💕
+  </div>
+</div>
+
+<script>
+  // Floating hearts
+  const heartsContainer = document.getElementById('hearts');
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (10 + Math.random() * 20) + 'px';
+    heart.innerText = '💖';
+    heartsContainer.appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+  }
+  setInterval(createHeart, 500);
+
+  // Password logic
+  const passwordBtn = document.getElementById('password-btn');
+  const passwordInput = document.getElementById('password-input');
+  const passwordMsg = document.getElementById('password-msg');
+  const screenPassword = document.getElementById('screen-password');
+  const screenMain = document.getElementById('screen-main');
+  const wrongMsgs = [
+    "Nope 😌 try again, think about us",
+    "Rasmalai… you know this one 👀💕"
+  ];
+  passwordBtn.onclick = () => {
+    if(passwordInput.value === '17/05/2025') {
+      screenPassword.classList.remove('active');
+      screenMain.classList.add('active');
+    } else {
+      passwordMsg.innerText = wrongMsgs[Math.floor(Math.random() * wrongMsgs.length)];
+    }
+  }
+
+  // Fun Question Logic
+  const snackBtns = document.querySelectorAll('.snack-btn');
+  const snackMsg = document.getElementById('snack-msg');
+  snackBtns.forEach(btn => {
+    btn.onclick = () => { snackMsg.innerText = "Correct. Obviously. Always you 😌💕"; }
+  });
+
+  // Days Together Counter
+  function updateDays() {
+    const start = new Date('2025-05-17');
+    const now = new Date();
+    const diff = Math.floor((now - start)/(1000*60*60*24));
+    document.getElementById('days-count').innerText = diff;
+  }
+  updateDays();
+  setInterval(updateDays, 86400000);
+
+  // Proposal buttons
+  const yesBtn = document.getElementById('yes-btn');
+  const noBtn = document.getElementById('no-btn');
+  const celebrationMsg = document.getElementById('celebration-msg');
+
+  // Yes button triggers confetti + hearts
+  yesBtn.onclick = () => {
+    celebrationMsg.style.display = 'block';
+    celebrationMsg.classList.add('fade-in');
+    triggerConfetti(50);
+    triggerSparkles(30);
+  }
+
+  // No button playful movement
+  noBtn.addEventListener('mouseover', () => {
+    const x = Math.random() * 80;
+    const y = Math.random() * 50;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  });
+
+  // Confetti function
+  function triggerConfetti(count) {
+    for(let i=0;i<count;i++){
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      c.style.left = Math.random()*100+'vw';
+      c.style.background = ['#ff99b7','#ffb3c6','#ffd1dc','#ff80a5'][Math.floor(Math.random()*4)];
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3000);
+    }
+  }
+
+  // Sparkles function
+  function triggerSparkles(count) {
+    for(let i=0;i<count;i++){
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left = Math.random()*100+'vw';
+      s.style.background = ['#fff0f5','#ffe4ec','#ffdde4'][Math.floor(Math.random()*3)];
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 2500);
+    }
+  }
+</script>
+
+</body>
+</html>
